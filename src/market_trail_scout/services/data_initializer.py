@@ -549,8 +549,11 @@ class DataInitializer:
                             INSERT INTO eod_prices (symbol, date, open, high, low, close, volume)
                             SELECT c.symbol, c.date, c.open, c.high, c.low, c.close, c.volume
                             FROM combined_df c
-                                LEFT ANTI JOIN eod_prices e
-                            ON c.symbol = e.symbol AND c.date = e.date
+                            WHERE NOT EXISTS (
+                                SELECT 1
+                                FROM eod_prices e
+                                WHERE c.symbol = e.symbol AND c.date = e.date
+                            )
                             ''')
             print(f"✅ Inserted {len(combined_df)} total rows across batch")
         except Exception as e:

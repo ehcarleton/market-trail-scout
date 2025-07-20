@@ -1,0 +1,20 @@
+[project]
+name = "market-trail-scout"
+version = "0.1.0"
+description = "Local open-source toolkit for scanning market signals and tracking trades."
+authors = [{ name = "Sam Carleton", email = "scarelton@miltonstreet.com" }]
+dependencies = [
+    "pandas",
+    "duckdb",
+    "yfinance",
+    "pandas-ta",
+    "fastapi",
+    "uvicorn"
+]
+
+[project.scripts]
+mts = "market_trail_scout.cli:main"
+
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
